@@ -17,13 +17,13 @@ import java.util.ArrayList;
  * This class will serve as the manager between the Java application and
  * the database.  This class creates the connection obtained through Tomcat
  */
-public class TomCatManager
+public class DataBaseManager
 {
     private Connection connection;
     private Statement statement;
     private ResultSet results;
 
-    TomCatManager()
+    DataBaseManager()
     {
         try
         {
@@ -241,5 +241,59 @@ public class TomCatManager
         }
 
         return output;
+    }
+
+    public int login(String username, String password)
+    {
+        int userId = 0;
+
+        try
+        {
+            // Query for a matching login
+            String query = "select accountID, accountUsername, accountPassword from account where accountUsername = '" +
+                    username + "' and accountPassword = '" + password + "'";
+            results = statement.executeQuery(query);
+
+            while(results.next() )
+            {
+                userId = results.getInt("accountId");
+
+                System.out.println(username + " was located as accountId " + userId);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return userId;
+    }
+
+    public boolean checkUsername(String uName)
+    {
+        try
+        {
+            String query = "select accountUsername from account";
+            results = statement.executeQuery(query);
+
+            while(results.next() )
+            {
+                if(uName.equalsIgnoreCase(results.getString("accountUsername") ) )
+                {
+                    return true;
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public void addAccount(JSONObject newUser)
+    {
+
     }
 }
