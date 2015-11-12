@@ -1,10 +1,12 @@
 package com.GameBook;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,7 +14,7 @@ import java.util.Date;
  */
 public class UIManager extends JFrame
 {
-    private int currentUser;
+    private static int currentUser;
     private DataBaseManager DBManager;
 
     private Container contentPane;
@@ -46,7 +48,7 @@ public class UIManager extends JFrame
         btnAccounts.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                accountsForm();
+                accountsForm(UIManager.currentUser);
             }
 
             @Override
@@ -209,11 +211,9 @@ public class UIManager extends JFrame
         JButton btnManage = new JButton("Manage Account");
         JButton btnLogout = new JButton("Logout");
 
-        btnManage.addMouseListener(new MouseListener()
-        {
+        btnManage.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e) {
                 manageForm();
             }
 
@@ -234,11 +234,9 @@ public class UIManager extends JFrame
             }
         });
 
-        btnLogout.addMouseListener(new MouseListener()
-        {
+        btnLogout.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e) {
                 contentPane.removeAll();
                 logout();
             }
@@ -275,9 +273,66 @@ public class UIManager extends JFrame
         reDraw();
     }
 
-    public void accountsForm()
+    public void accountsForm(int currentUser)
     {
-        System.out.println("Accounts button clicked");
+        // Set up default UI elements
+        contentPane.removeAll();
+        JLabel labAccounts = new JLabel("Accounts");
+        labAccounts.setFont(TITLEFONT);
+        contentPane.add(labAccounts);
+        contentPane.add(btnEvents);
+
+        // Add accounts to the UI layout
+        // Store the accounts in a JSONArray
+        ArrayList<String> accounts = DBManager.getAccounts(UIManager.currentUser);
+
+        // Create an ArrayList that will store the JLabels
+        ArrayList<JLabel> labArray = new ArrayList<JLabel>();
+
+        // For each user obtained create a JLabel and add it to the ArrayList
+        for(int i = 0; i < accounts.size(); i++)
+        {
+            final JLabel label = new JLabel(accounts.get(i).toString() );
+
+            // Set a MouseListener to detect if a user wishes to see the registered games
+            label.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e)
+                {
+                    getRegisteredGames(label.getText() );
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+
+            labArray.add(label);
+        }
+
+        // For each label add it o the form
+        for(int i = 0; i < labArray.size(); i++)
+        {
+            contentPane.add(labArray.get(i));
+        }
+
+        this.reDraw();
     }
 
     public void eventsForm()
@@ -608,6 +663,30 @@ public class UIManager extends JFrame
             System.out.println(year + " is not a leap year");
             return false;
         }
+    }
+
+    public void getRegisteredGames(String username)
+    {
+        ArrayList<Game> games = DBManager.getGames(username);
+
+        contentPane.removeAll();
+        JLabel userGames = new JLabel(username + "'s Games/Services");
+        contentPane.add(userGames);
+        contentPane.add(btnAccounts);
+        contentPane.add(btnEvents);
+
+        for(int i = 0; i < games.size(); i++)
+        {
+            Game g = games.get(i);
+            JLabel labGame = new JLabel(g.getGame() );
+            contentPane.add(labGame);
+            JLabel labName = new JLabel(g.getName() );
+            contentPane.add(labName);
+            JLabel labServer = new JLabel(g.getServer() );
+            contentPane.add(labServer);
+        }
+
+        this.reDraw();
     }
 
     public void manageForm()
