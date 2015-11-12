@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class DataBaseManager
 {
     private Connection connection;
+    private PreparedStatement prepStatement;
     private Statement statement;
     private ResultSet results;
 
@@ -294,6 +295,37 @@ public class DataBaseManager
 
     public void addAccount(JSONObject newUser)
     {
+        // Construct a query from the JSON object obtained in the registration form
+        String query = "INSERT INTO account(accountUsername, accountPassword, accountEmail, accountFirstName, " +
+                "accountLastName, accountBirthday) VALUES (";
+        query += "\"" + newUser.get("username").toString() + "\", ";
+        query += "\"" + newUser.get("password").toString() + "\", ";
+        query += "\"" + newUser.get("email").toString() + "\", ";
+        query += "\"" + newUser.get("fName").toString() + "\", ";
+        query += "\"" + newUser.get("lName").toString() + "\", ";
+        query += "\"" + newUser.get("year").toString() + "-";
 
+        // convert the month to an int and add a 0 placeholder if less than 10
+        int month = Integer.parseInt(newUser.get("month").toString() );
+        if(month < 10)
+            query += "0";
+        query += month + "-";
+
+        // convert the month to an int and add a 0 placeholder if less than 10
+        int day = Integer.parseInt(newUser.get("day").toString() );
+        if(day < 10)
+            query += "0";
+        query += day + "\")";
+
+        try
+        {
+            prepStatement = connection.prepareStatement(query);
+            prepStatement.execute();
+            System.out.println("A new user " + newUser.get("username").toString() + " was created");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

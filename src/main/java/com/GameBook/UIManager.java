@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 
 /**
  * Created by Joshua Dalton on 11/9/2015.
@@ -312,7 +313,7 @@ public class UIManager extends JFrame
             cmbMonth.addItem(i);
 
         JLabel labRegBDDay = new JLabel("Day of the month you were born: ");
-        JComboBox cmbDay = new JComboBox();
+        final JComboBox cmbDay = new JComboBox();
         for(int i = 1; i <= 31; i++)
             cmbDay.addItem(i);
 
@@ -362,11 +363,14 @@ public class UIManager extends JFrame
                 newUser.put("fName", txtRegFName.getText() );
                 newUser.put("lName", txtRegLName.getText() );
                 newUser.put("month", cmbMonth.getSelectedItem() );
-                newUser.put("day", cmbMonth.getSelectedItem() );
-                newUser.put("year", txtYear);
+                newUser.put("day", cmbDay.getSelectedItem() );
+                newUser.put("year", txtYear.getText() );
 
                 if (validateRegistration(newUser) )
+                {
                     DBManager.addAccount(newUser);
+                    login(newUser.get("username").toString() );
+                }
             }
 
             @Override
@@ -423,12 +427,15 @@ public class UIManager extends JFrame
         for(int i = 3; i <= 19; i++)
             contentPane.getComponent(i).setForeground(Color.black);
 
+        // Has the desired username been used previously
         if(DBManager.checkUsername(newUser.get("username").toString() ) )
         {
             contentPane.getComponent(3).setForeground(Color.red);
             errorMessage += "A user by that username already exists\n";
             isValid = false;
         }
+
+        // Is the username at least 4 characters long
         else if(newUser.get("username").toString().isEmpty() ||
                 newUser.get("username").toString().length() < 4)
         {
@@ -437,6 +444,7 @@ public class UIManager extends JFrame
             isValid = false;
         }
 
+        // Is the password at least 8 characters long
         if(newUser.get("password").toString().length() < 8 )
         {
             contentPane.getComponent(5).setForeground(Color.red);
@@ -448,6 +456,7 @@ public class UIManager extends JFrame
         String upperAlphaRegex = ".*[A-Z].*";
         String lowerAlphaRegex = ".*[a-z].*";
 
+        // Make sure the password includes numbers, uppercase letters, and lowercase letters
         if(!(newUser.get("password").toString().matches(numRegex) &&
            newUser.get("password").toString().matches(upperAlphaRegex) &&
            newUser.get("password").toString().matches(lowerAlphaRegex) ) )
@@ -457,6 +466,7 @@ public class UIManager extends JFrame
             isValid = false;
         }
 
+        // Test that the password confirmation matches the first password
         if(!newUser.get("password").toString().equals(newUser.get("confPassword").toString()) )
         {
             contentPane.getComponent(7).setForeground(Color.red);
@@ -464,17 +474,52 @@ public class UIManager extends JFrame
             isValid = false;
         }
 
-        String emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9+]\\.)+[a-zA-Z]{2,}))$";
-        //java.util.regex.Pattern emailPattern = java.util.regex.Pattern.compile(emailRegex);
-        //java.util.regex.Matcher matcher = emailPattern.matcher(newUser.get("email").toString() );
+        // Establish a proper email pattern
+        String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-        if(!newUser.get("email").toString().matches(emailRegex) )
+        java.util.regex.Pattern emailPattern = java.util.regex.Pattern.compile(emailRegex);
+        java.util.regex.Matcher matcher = emailPattern.matcher(newUser.get("email").toString() );
+
+        // Test the email field for a valid email pattern
+        if(!matcher.matches() )
         {
             contentPane.getComponent(9).setForeground(Color.red);
             errorMessage += "Must register a valid email address\n";
             isValid = false;
         }
 
+        //Ensure the first name field is not empty
+        if(newUser.get("fName").toString().isEmpty() )
+        {
+            contentPane.getComponent(11).setForeground(Color.red);
+            errorMessage += "Must enter a first name\n";
+            isValid = false;
+        }
+
+        // Ensure the last name field is not empty
+        if(newUser.get("lName").toString().isEmpty() )
+        {
+            contentPane.getComponent(13).setForeground(Color.red);
+            errorMessage += "Must enter a last name\n";
+            isValid = false;
+        }
+
+        int month = Integer.parseInt(newUser.get("month").toString() );
+        int day = Integer.parseInt(newUser.get("day").toString() );
+        int year = Integer.parseInt(newUser.get("year").toString() ) - 1900;
+        // Java Dates are calculated as being 1900 less than the real year
+
+        // Test if the date entered is valid
+        if(!isValidDate(month, day, year) )
+        {
+            for(int i = 15; i <= 19; i += 2)
+                contentPane.getComponent(i).setForeground(Color.red);
+            errorMessage += "The date of birth must be a valid date and users must be at least 13 years of age\n";
+            isValid = false;
+        }
+
+        //If the form is not valid display an error message and redraw the screen
         if(!isValid)
         {
             this.reDraw();
@@ -482,6 +527,87 @@ public class UIManager extends JFrame
         }
 
         return isValid;
+    }
+
+    public boolean isValidDate(int month, int day, int year)
+    {
+        int maxDaysInMonth = 0;
+
+        switch (month)
+        {
+            case 1:
+                maxDaysInMonth = 31;
+                break;
+            case 2:
+                if(isLeapYear(year + 1900) ) // Adding 1900 as a workaround because of how Dates are handled
+                    maxDaysInMonth = 29;
+                else
+                    maxDaysInMonth = 28;
+                break;
+            case 3:
+                maxDaysInMonth = 31;
+                break;
+            case 4:
+                maxDaysInMonth = 30;
+                break;
+            case 5:
+                maxDaysInMonth = 31;
+                break;
+            case 6:
+                maxDaysInMonth = 30;
+                break;
+            case 7:
+                maxDaysInMonth = 31;
+                break;
+            case 8:
+                maxDaysInMonth = 31;
+                break;
+            case 9:
+                maxDaysInMonth = 30;
+                break;
+            case 10:
+                maxDaysInMonth = 31;
+                break;
+            case 11:
+                maxDaysInMonth = 30;
+                break;
+            case 12:
+                maxDaysInMonth = 31;
+                break;
+            default:
+                contentPane.getComponent(15).setForeground(Color.red);
+                break;
+        }
+
+        if(day > maxDaysInMonth)
+            return false;
+
+        Date currDate = new Date();
+
+        if(currDate.getYear() - year > 13)
+            return true;
+        else if(currDate.getYear() - year == 13)
+            if(currDate.getMonth() + 1 - month > 0)
+                return true;
+            else if(currDate.getMonth() + 1 - month == 0)
+                if(currDate.getDate() - day >= 0)
+                    return true;
+
+        return false;
+    }
+
+    public boolean isLeapYear(int year)
+    {
+        if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+        {
+            System.out.println(year + " is a leap year");
+            return true;
+        }
+        else
+        {
+            System.out.println(year + " is not a leap year");
+            return false;
+        }
     }
 
     public void manageForm()
