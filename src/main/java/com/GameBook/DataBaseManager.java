@@ -3,15 +3,10 @@ package com.GameBook;
 /**
  * Created by Joshua Dalton, Melissa Stricker, and Jake Hatfield on 11/4/2015.
  */
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.*;
 
 /**
  * This class will serve as the manager between the Java application and
@@ -62,6 +57,28 @@ public class DataBaseManager
         return users;
     }
 
+    public ArrayList<String> getAccounts(String input)
+    {
+        ArrayList<String> users = new ArrayList<String>();
+        try
+        {
+            String query = "select * from account where locate('" + input + "', accountUsername)";
+            results = statement.executeQuery(query);
+
+            while(results.next() )
+            {
+                String user = results.getString("accountUsername");
+                users.add(user);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+
     public ArrayList<Game> getGames(String username)
     {
         ArrayList<Game> games = new ArrayList<Game>();
@@ -78,7 +95,7 @@ public class DataBaseManager
                 Game game = new Game();
                 if(results.getString("contactCharacter_AccountName") != null)
                 {
-                    game.setName(results.getString("contactCharacter_AccountName") );
+                    game.setName(results.getString("contactCharacter_AccountName"));
                 }
                 else
                     game.setName("N/A");
@@ -103,6 +120,142 @@ public class DataBaseManager
         }
 
         return games;
+    }
+
+    public ArrayList<CalEvent> getEvents(Date date)
+    {
+        ArrayList<CalEvent> events = new ArrayList<CalEvent>();
+
+        try
+        {
+            String query = "select * from calendarevent where eventDateTime >= \"" +
+                    (date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDate() +
+                    " order by eventDateTime asc\"";
+            results = statement.executeQuery(query);
+
+            while(results.next() )
+            {
+                CalEvent event = new CalEvent();
+
+                event.setName(results.getString("eventName"));
+
+                // Get the date as a string, then convert to a java.util.Date
+                String strDate = results.getString("eventDateTime");
+                int year = Integer.parseInt(strDate.substring(0, 4) ) - 1900;
+                int month = Integer.parseInt(strDate.substring(5, 7) ) - 1;
+                int dateInMonth = Integer.parseInt(strDate.substring(8, 10) );
+                int hours = Integer.parseInt(strDate.substring(11, 13) );
+                int minutes = Integer.parseInt(strDate.substring(14, 16) );
+
+                // Initialize  the date
+                event.setDate(new java.util.Date(year, month, dateInMonth) );
+
+                // Set the time for the event
+                event.getDate().setHours(hours);
+                event.getDate().setMinutes(minutes);
+
+                if(results.getString("eventGame") != null)
+                {
+                    event.setGame(results.getString("eventGame"));
+                }
+                else
+                {
+                    event.setGame("N/A");
+                }
+                if(results.getString("eventLocation") != null)
+                {
+                    event.setLocation(results.getString("eventLocation"));
+                }
+                else
+                {
+                    event.setLocation("N/A");
+                }
+                if(results.getString("eventGame") != null)
+                {
+                    event.setDescription(results.getString("eventDescription"));
+                }
+                else
+                {
+                    event.setDescription("N/A");
+                }
+
+                events.add(event);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return events;
+    }
+
+    public ArrayList<CalEvent> getEvents(Date date, String input, String column)
+    {
+        ArrayList<CalEvent> events = new ArrayList<CalEvent>();
+
+        try
+        {
+            String query = ("select * from calendarevent where eventDateTime >= \"" +
+                    (date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDate() +
+                    "\" and locate(\"" + input + "\", " + column + ") order by eventDateTime asc");
+            results = statement.executeQuery(query);
+
+            while(results.next() )
+            {
+                CalEvent event = new CalEvent();
+
+                event.setName(results.getString("eventName"));
+
+                // Get the date as a string, then convert to a java.util.Date
+                String strDate = results.getString("eventDateTime");
+                int year = Integer.parseInt(strDate.substring(0, 4) ) - 1900;
+                int month = Integer.parseInt(strDate.substring(5, 7) ) - 1;
+                int dateInMonth = Integer.parseInt(strDate.substring(8, 10) );
+                int hours = Integer.parseInt(strDate.substring(11, 13) );
+                int minutes = Integer.parseInt(strDate.substring(14, 16) );
+
+                // Initialize  the date
+                event.setDate(new java.util.Date(year, month, dateInMonth) );
+
+                // Set the time for the event
+                event.getDate().setHours(hours);
+                event.getDate().setMinutes(minutes);
+
+                if(results.getString("eventGame") != null)
+                {
+                    event.setGame(results.getString("eventGame"));
+                }
+                else
+                {
+                    event.setGame("N/A");
+                }
+                if(results.getString("eventLocation") != null)
+                {
+                    event.setLocation(results.getString("eventLocation"));
+                }
+                else
+                {
+                    event.setLocation("N/A");
+                }
+                if(results.getString("eventGame") != null)
+                {
+                    event.setDescription(results.getString("eventDescription"));
+                }
+                else
+                {
+                    event.setDescription("N/A");
+                }
+
+                events.add(event);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return events;
     }
 
     public int login(String username, String password)
@@ -183,6 +336,39 @@ public class DataBaseManager
             prepStatement = connection.prepareStatement(query);
             prepStatement.execute();
             System.out.println("A new user " + newUser.get("username").toString() + " was created");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePassword(String newPassword, int currentUser)
+    {
+        try
+        {
+            String query = "update account set accountPassword = \"" + newPassword +
+                    "\" where accountID = " + currentUser;
+            prepStatement = connection.prepareStatement(query);
+            prepStatement.execute();
+            System.out.println("Password updated");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void addGame_Service(String username, String game_Service, String server, int currentUser)
+    {
+        try
+        {
+            String query = "insert into contact (FK_accountID, contactCharacter_accountName," +
+                    "contactGame_ServiceName, contactServerName) values (" + currentUser + ", \"" +
+                    username + "\", \"" + game_Service + "\", \"" + server + "\")";
+            prepStatement = connection.prepareStatement(query);
+            prepStatement.execute();
+            System.out.println("A new contact was created");
         }
         catch(Exception e)
         {

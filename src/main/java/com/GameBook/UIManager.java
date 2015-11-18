@@ -1,6 +1,5 @@
 package com.GameBook;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +23,7 @@ public class UIManager extends JFrame
     private GridLayout uiLayout;
 
     final Font TITLEFONT = new Font("Arial Black", Font.PLAIN, 20);
+    final Font LARGEFONT = new Font("Arial", Font.PLAIN, 16);
 
     private JButton btnAccounts;
     private JButton btnEvents;
@@ -37,7 +37,7 @@ public class UIManager extends JFrame
         // Create the layout for the UI
         this.setTitle("Gamebook");
         contentPane = this.getContentPane();
-        uiLayout = new GridLayout(15, 5, 1, 1);
+        uiLayout = new GridLayout(20, 5, 1, 1);
         contentPane.setLayout(uiLayout);
 
         // Initialize the Accounts and Events buttons
@@ -237,6 +237,7 @@ public class UIManager extends JFrame
         btnLogout.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                currentUser = 0;
                 contentPane.removeAll();
                 logout();
             }
@@ -282,8 +283,43 @@ public class UIManager extends JFrame
         contentPane.add(labAccounts);
         contentPane.add(btnEvents);
 
+        // Add a TextField and button for queries
+        final JTextField txtUsername = new JTextField();
+        contentPane.add(txtUsername);
+        JButton btnQuery = new JButton("Search usernames");
+
+        // Set the MouseListener to search the database for usernames containing the text in the TextField
+        btnQuery.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                queryAccounts(txtUsername.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        contentPane.add(btnQuery);
+
         // Add accounts to the UI layout
-        // Store the accounts in a JSONArray
+        // Store the accounts in a ArrayList
         ArrayList<String> accounts = DBManager.getAccounts(UIManager.currentUser);
 
         // Create an ArrayList that will store the JLabels
@@ -299,7 +335,7 @@ public class UIManager extends JFrame
                 @Override
                 public void mouseClicked(MouseEvent e)
                 {
-                    getRegisteredGames(label.getText() );
+                    getRegisteredGames(label.getText());
                 }
 
                 @Override
@@ -337,7 +373,239 @@ public class UIManager extends JFrame
 
     public void eventsForm()
     {
-        System.out.println("Events button clicked");
+        // Set up Default UI Elements
+        contentPane.removeAll();
+        JLabel labEvents = new JLabel("Events");
+        labEvents.setFont(TITLEFONT);
+        contentPane.add(labEvents);
+        contentPane.add(btnAccounts);
+
+        // Add a section for querying events
+        // Add radio buttons to allow searching by event name or by game
+        final JRadioButton radName = new JRadioButton("Search by event name");
+        final JRadioButton radGame = new JRadioButton("Search by game");
+
+        // Create a ButtonGroup so that the radio buttons are mutually exclusive
+        ButtonGroup radios = new ButtonGroup();
+        radios.add(radName);
+        radios.add(radGame);
+
+        contentPane.add(radName);
+        contentPane.add(radGame);
+
+        final JTextField txtEventQuery = new JTextField();
+        contentPane.add(txtEventQuery);
+        JButton btnQuery = new JButton("Search usernames");
+
+        // Set the MouseListener to search the database for usernames containing the text in the TextField
+        btnQuery.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(radName.isSelected() == false && radGame.isSelected() == false)
+                {
+                    JOptionPane.showMessageDialog(null, "Please select whether to search by event name or by game");
+                }
+                else
+                {
+                    queryEvents(txtEventQuery.getText(), radName.isSelected() );
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        contentPane.add(btnQuery);
+
+        // Get all the events on or after today's date
+        ArrayList<CalEvent> events = DBManager.getEvents(new Date());
+
+        // Create an ArrayList that will store the JLabels
+        ArrayList<JLabel> labArray = new ArrayList<JLabel>();
+
+        // For each event obtained create a JLabel for the date and for the name
+        for(int i = 0; i < events.size(); i++)
+        {
+            // Convert the date to a JLabel
+            JLabel date = new JLabel((events.get(i).getDate().getMonth() + 1) + "/" +
+                    events.get(i).getDate().getDate() + "/" + (events.get(i).getDate().getYear() + 1900) );
+            labArray.add(date);
+
+            // Create an EventLabel for the event
+            final EventLabel label = new EventLabel(events.get(i) );
+
+            // Set a MouseListener to detect if a user wishes to see the event
+            label.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    getEvent(label.getEvent());
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+
+            labArray.add(label);
+        }
+
+        // For each label add it o the form
+        for(int i = 0; i < labArray.size(); i++)
+        {
+            contentPane.add(labArray.get(i));
+        }
+
+        this.reDraw();
+    }
+
+    public void getEvent(CalEvent event)
+    {
+        // Clear the layout and add the details of the event
+        contentPane.removeAll();
+        JLabel name = new JLabel(event.getName() );
+        name.setFont(TITLEFONT);
+        JLabel date = new JLabel(event.getDate().toString() );
+        JLabel game = new JLabel(event.getGame() );
+        JLabel location = new JLabel(event.getLocation() );
+        JLabel description = new JLabel(event.getDescription() );
+
+        contentPane.add(btnEvents);
+        contentPane.add(btnAccounts);
+        contentPane.add(name);
+        contentPane.add(date);
+        contentPane.add(game);
+        contentPane.add(location);
+        contentPane.add(description);
+
+        this.reDraw();
+    }
+
+    public void queryEvents(String input, boolean name) {
+        contentPane.removeAll();
+        contentPane.add(btnAccounts);
+        contentPane.add(btnEvents);
+
+        ArrayList<CalEvent> events = new ArrayList<CalEvent>();
+        JLabel labResults = new JLabel();
+
+        if(name)
+        {
+            labResults.setText("Events matching the name \"" + input + "\"");
+        }
+        else
+        {
+            labResults.setText("Events matching the game \"" + input + "\"");
+        }
+
+        labResults.setFont(TITLEFONT);
+        contentPane.add(labResults);
+
+        String column;
+
+        if(name)
+        {
+            column = "eventName";
+        }
+        else
+        {
+            column = "eventGame";
+        }
+
+        events = DBManager.getEvents(new java.util.Date(), input, column);
+
+        if(events.size() > 0)
+        {
+            // Create an ArrayList that will store the JLabels
+            ArrayList<JLabel> labArray = new ArrayList<JLabel>();
+
+            // For each event obtained create a JLabel for the date and for the name
+            for(int i = 0; i < events.size(); i++)
+            {
+                // Convert the date to a JLabel
+                JLabel date = new JLabel((events.get(i).getDate().getMonth() + 1) + "/" +
+                        events.get(i).getDate().getDate() + "/" + (events.get(i).getDate().getYear() + 1900) );
+                labArray.add(date);
+
+                // Create an EventLabel for the event
+                final EventLabel label = new EventLabel(events.get(i) );
+
+                // Set a MouseListener to detect if a user wishes to see the event
+                label.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        getEvent(label.getEvent());
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+                });
+
+                labArray.add(label);
+            }
+
+            // For each label add it o the form
+            for(int i = 0; i < labArray.size(); i++)
+            {
+                contentPane.add(labArray.get(i));
+            }
+        }
+        else
+        {
+            JLabel labNoMatches = new JLabel("No results weree found");
+            contentPane.add(labNoMatches);
+        }
+
+        this.reDraw();
     }
 
     public void registerForm()
@@ -670,15 +938,17 @@ public class UIManager extends JFrame
         ArrayList<Game> games = DBManager.getGames(username);
 
         contentPane.removeAll();
-        JLabel userGames = new JLabel(username + "'s Games/Services");
-        contentPane.add(userGames);
         contentPane.add(btnAccounts);
         contentPane.add(btnEvents);
+        JLabel userGames = new JLabel(username + "'s Games/Services");
+        userGames.setFont(TITLEFONT);
+        contentPane.add(userGames);
 
         for(int i = 0; i < games.size(); i++)
         {
             Game g = games.get(i);
             JLabel labGame = new JLabel(g.getGame() );
+            labGame.setFont(LARGEFONT);
             contentPane.add(labGame);
             JLabel labName = new JLabel(g.getName() );
             contentPane.add(labName);
@@ -689,8 +959,238 @@ public class UIManager extends JFrame
         this.reDraw();
     }
 
+    public void queryAccounts(String input)
+    {
+        contentPane.removeAll();
+        contentPane.add(btnAccounts);
+        contentPane.add(btnEvents);
+        JLabel labResults = new JLabel("Usernames containing \"" + input + "\"");
+        contentPane.add(labResults);
+
+        ArrayList<String> accounts = DBManager.getAccounts(input);
+
+        if(accounts.size() > 0) // If users were found
+        {
+            // Create an ArrayList that will store the JLabels
+            ArrayList<JLabel> labArray = new ArrayList<JLabel>();
+
+            // For each user obtained create a JLabel and add it to the ArrayList
+            for(int i = 0; i < accounts.size(); i++)
+            {
+                final JLabel label = new JLabel(accounts.get(i).toString() );
+
+                // Set a MouseListener to detect if a user wishes to see the registered games
+                label.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e)
+                    {
+                        getRegisteredGames(label.getText() );
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+                });
+
+                labArray.add(label);
+            }
+
+            // For each label add it o the form
+            for(int i = 0; i < labArray.size(); i++)
+            {
+                contentPane.add(labArray.get(i));
+            }
+        }
+        else // If no users were found
+        {
+            JLabel labNoMatch = new JLabel("No users were found containing \"" + input + "\"");
+            contentPane.add(labNoMatch);
+        }
+
+        this.reDraw();
+    }
+
     public void manageForm()
     {
-        System.out.println("Manage button clicked");
+        contentPane.removeAll();
+        JLabel labManage = new JLabel("Edit Account");
+        contentPane.add(labManage);
+        JButton btnBack = new JButton("Back");
+
+        btnBack.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                contentPane.removeAll();
+                contentPane.add(btnAccounts);
+                contentPane.add(btnEvents);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        contentPane.add(btnBack);
+
+        // Option to update a password
+        JLabel labNewPassword = new JLabel("Update your password: ");
+        contentPane.add(labNewPassword);
+        final JPasswordField pasNewPassword = new JPasswordField();
+        contentPane.add(pasNewPassword);
+        JLabel labConfNewPass = new JLabel("Confirm new password: ");
+        contentPane.add(labConfNewPass);
+        final JPasswordField pasConfNewPass = new JPasswordField();
+        contentPane.add(pasConfNewPass);
+        JButton btnUpdatePassword = new JButton("Update Password");
+        btnUpdatePassword.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (validateNewPassword(pasNewPassword.getText(), pasConfNewPass.getText())) {
+                    DBManager.updatePassword(pasNewPassword.getText(), currentUser);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        contentPane.add(btnUpdatePassword);
+        JLabel labAccountName = new JLabel("Username");
+
+        // Add the ability to register a game or service
+        contentPane.add(labAccountName);
+        final JTextField txtAccountName = new JTextField();
+        contentPane.add(txtAccountName);
+        JLabel labGame_Service = new JLabel("Which game or service is this?");
+        contentPane.add(labGame_Service);
+        final JTextField txtGame_Service = new JTextField();
+        contentPane.add(txtGame_Service);
+        JLabel labServer = new JLabel("Name of the server if applicable: ");
+        contentPane.add(labServer);
+        final JTextField txtServer = new JTextField(null);
+        contentPane.add(txtServer);
+        JButton btnAddGame_Service = new JButton("Register a game or service: ");
+        btnAddGame_Service.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(!txtAccountName.getText().isEmpty() && !txtGame_Service.getText().isEmpty() )
+                {
+                    DBManager.addGame_Service(txtAccountName.getText(), txtGame_Service.getText(),
+                            txtServer.getText(), currentUser);
+                    txtAccountName.setText(null);
+                    txtGame_Service.setText(null);
+                    txtServer.setText(null);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        contentPane.add(btnAddGame_Service);
+        this.reDraw();
+    }
+
+    public boolean validateNewPassword(String newPass, String confPass)
+    {
+        boolean isValid = true;
+        String errorMessage= "";
+
+        if(newPass.length() < 8)
+        {
+            errorMessage += "Passwords must be at least 8 characters long\n";
+            isValid = false;
+        }
+        String numRegex = ".*[0-9].*";
+        String upperAlphaRegex = ".*[A-Z].*";
+        String lowerAlphaRegex = ".*[a-z].*";
+
+        // Make sure the password includes numbers, uppercase letters, and lowercase letters
+        if (!(newPass.matches(numRegex) && newPass.matches(upperAlphaRegex) &&
+                newPass.matches(lowerAlphaRegex) ) )
+        {
+            errorMessage += "Passwords must contain letters, uppercase letters, and lowercase numbers\n";
+            isValid = false;
+        }
+
+        // Test that the password confirmation matches the first password
+        if(!newPass.equals(confPass) )
+        {
+            errorMessage += "Confirmation password must match password\n";
+            isValid = false;
+        }
+
+        if(!isValid)
+            JOptionPane.showMessageDialog(null, errorMessage);
+
+        return isValid;
     }
 }

@@ -9,7 +9,7 @@ public class App
 {
     public static void main(String[] args)
     {
-        // Create the UI elements
+        // Create the UI elements and run the forms
         SwingUtilities.invokeLater(new Runnable()
         {
             @Override

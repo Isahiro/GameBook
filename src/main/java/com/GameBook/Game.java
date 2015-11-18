@@ -1,7 +1,7 @@
 package com.GameBook;
 
 /**
- * Created by student on 11/11/2015.
+ * Created by Joshua Dalton on 11/11/2015.
  */
 public class Game
 {
