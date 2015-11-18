@@ -1079,8 +1079,12 @@ public class UIManager extends JFrame
         btnUpdatePassword.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (validateNewPassword(pasNewPassword.getText(), pasConfNewPass.getText())) {
+                if (validateNewPassword(pasNewPassword.getText(), pasConfNewPass.getText()))
+                {
                     DBManager.updatePassword(pasNewPassword.getText(), currentUser);
+                    pasNewPassword.setText(null);
+                    pasConfNewPass.setText(null);
+                    JOptionPane.showMessageDialog(null, "Password updated");
                 }
             }
 

@@ -29,10 +29,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
-              <folding>
-                <element signature="e#288#581#0" expanded="true" />
-                <element signature="e#580#581#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,42 +37,26 @@
       <file leaf-file-name="UIManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/UIManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3316062">
-              <caret line="25" column="55" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.64675325">
+              <caret line="1086" column="73" selection-start-line="1086" selection-start-column="73" selection-end-line="1086" selection-end-column="73" />
               <folding>
                 <element signature="docComment;class#UIManager#0" expanded="false" />
                 <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />
                 <element signature="method#greeting#0;class#UIManager#0" expanded="false" />
                 <element signature="method#logout#0;class#UIManager#0" expanded="false" />
-                <element signature="e#4655#4656#0" expanded="true" />
-                <element signature="e#4701#4702#0" expanded="true" />
                 <element signature="method#login#0;class#UIManager#0" expanded="false" />
-                <element signature="e#5947#5948#0" expanded="true" />
-                <element signature="e#5991#5992#0" expanded="true" />
                 <element signature="method#accountsForm#0;class#UIManager#0" expanded="false" />
-                <element signature="e#8120#8121#0" expanded="true" />
-                <element signature="e#8188#8189#0" expanded="true" />
                 <element signature="e#8882#8890#0" expanded="true" />
-                <element signature="e#9351#9352#0" expanded="true" />
-                <element signature="e#9426#9427#0" expanded="true" />
                 <element signature="method#eventsForm#0;class#UIManager#0" expanded="false" />
                 <element signature="e#12321#12329#0" expanded="true" />
-                <element signature="e#13080#13081#0" expanded="true" />
-                <element signature="e#13146#13147#0" expanded="true" />
                 <element signature="method#getEvent#0;class#UIManager#0" expanded="false" />
                 <element signature="method#queryEvents#0;class#UIManager#0" expanded="false" />
                 <element signature="e#14766#14776#0" expanded="true" />
                 <element signature="e#15523#15531#0" expanded="true" />
-                <element signature="e#16334#16335#0" expanded="true" />
-                <element signature="e#16408#16409#0" expanded="true" />
                 <element signature="method#registerForm#0;class#UIManager#0" expanded="false" />
                 <element signature="method#isValidDate#0;class#UIManager#0" expanded="false" />
                 <element signature="method#isLeapYear#0;class#UIManager#0" expanded="false" />
                 <element signature="method#queryAccounts#0;class#UIManager#0" expanded="false" />
-                <element signature="e#30381#30382#0" expanded="true" />
-                <element signature="e#30465#30466#0" expanded="true" />
-                <element signature="class#31660:32352" expanded="false" />
-                <element signature="method#validateNewPassword#0;class#UIManager#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -244,8 +225,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -634,26 +615,27 @@
       <workItem from="1447197421448" duration="590000" />
       <workItem from="1447280205829" duration="16654000" />
       <workItem from="1447826475902" duration="21690000" />
+      <workItem from="1447885541162" duration="639000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76121000" />
+    <option name="totallyTimeSpent" value="76760000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32463294" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32463294" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32626426" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -702,11 +684,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/App.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="e#288#581#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-          </folding>
+          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -719,35 +698,130 @@
             <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />
             <element signature="method#greeting#0;class#UIManager#0" expanded="false" />
             <element signature="method#logout#0;class#UIManager#0" expanded="false" />
-            <element signature="e#4655#4656#0" expanded="true" />
-            <element signature="e#4701#4702#0" expanded="true" />
             <element signature="method#login#0;class#UIManager#0" expanded="false" />
-            <element signature="e#5947#5948#0" expanded="true" />
-            <element signature="e#5991#5992#0" expanded="true" />
             <element signature="method#accountsForm#0;class#UIManager#0" expanded="false" />
-            <element signature="e#8120#8121#0" expanded="true" />
-            <element signature="e#8188#8189#0" expanded="true" />
             <element signature="e#8882#8890#0" expanded="true" />
-            <element signature="e#9351#9352#0" expanded="true" />
-            <element signature="e#9426#9427#0" expanded="true" />
             <element signature="method#eventsForm#0;class#UIManager#0" expanded="false" />
             <element signature="e#12321#12329#0" expanded="true" />
-            <element signature="e#13080#13081#0" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
             <element signature="method#getEvent#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryEvents#0;class#UIManager#0" expanded="false" />
             <element signature="e#14766#14776#0" expanded="true" />
             <element signature="e#15523#15531#0" expanded="true" />
-            <element signature="e#16334#16335#0" expanded="true" />
-            <element signature="e#16408#16409#0" expanded="true" />
             <element signature="method#registerForm#0;class#UIManager#0" expanded="false" />
             <element signature="method#isValidDate#0;class#UIManager#0" expanded="false" />
             <element signature="method#isLeapYear#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryAccounts#0;class#UIManager#0" expanded="false" />
-            <element signature="e#30381#30382#0" expanded="true" />
-            <element signature="e#30465#30466#0" expanded="true" />
-            <element signature="class#31660:32352" expanded="false" />
-            <element signature="method#validateNewPassword#0;class#UIManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/CalEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/EventLabel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/DataBaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="377" column="1" selection-start-line="377" selection-start-column="1" selection-end-line="377" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getAccounts#0;class#DataBaseManager#0" expanded="false" />
+            <element signature="e#1054#1062#0" expanded="true" />
+            <element signature="e#1634#1642#0" expanded="true" />
+            <element signature="method#getGames#0;class#DataBaseManager#0" expanded="false" />
+            <element signature="e#2209#2215#0" expanded="true" />
+            <element signature="method#getEvents#0;class#DataBaseManager#0" expanded="false" />
+            <element signature="e#3693#3703#0" expanded="true" />
+            <element signature="e#6111#6121#0" expanded="true" />
+            <marker date="1447846762148" expanded="true" signature="1116:1171" placeholder="SELECT accou..account..." />
+            <marker date="1447846762148" expanded="true" signature="1696:1732" placeholder="select * fro..account..." />
+            <marker date="1447846762148" expanded="true" signature="1696:1764" placeholder="SELECT accou..account..." />
+            <marker date="1447846762148" expanded="true" signature="2270:2517" placeholder="select conta..contact..." />
+            <marker date="1447846762148" expanded="true" signature="3758:3811" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="3758:3863" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="3758:3893" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="3758:3964" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="3964:3965" placeholder="select conta..contact..." />
+            <marker date="1447846762148" expanded="true" signature="6177:6361" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="6177:6387" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="6177:6400" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="6177:6429" placeholder="select * fro..calendarevent..." />
+            <marker date="1447846762148" expanded="true" signature="8618:8785" placeholder="select accou..account..." />
+            <marker date="1447846762148" expanded="true" signature="9271:9306" placeholder="select accou..account..." />
+            <marker date="1447846762148" expanded="true" signature="9859:10008" placeholder="INSERT INTO ..." />
+            <marker date="1447846762148" expanded="true" signature="11311:11342" placeholder="update accou..." />
+            <marker date="1447846762148" expanded="true" signature="11311:11347" placeholder="update accou..." />
+            <marker date="1447846762148" expanded="true" signature="11311:11350" placeholder="update accou..." />
+            <marker date="1447846762148" expanded="true" signature="11311:11391" placeholder="update accou..." />
+            <marker date="1447846762148" expanded="true" signature="11311:11409" placeholder="update accou..." />
+            <marker date="1447846762148" expanded="true" signature="11311:11410" placeholder="update accou..." />
+            <marker date="1447846762148" expanded="true" signature="11835:11854" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:11967" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:11976" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:11996" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:11997" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:11999" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:12002" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:12038" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:12041" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:12064" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:12067" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:12084" placeholder="insert into ..." />
+            <marker date="1447846762148" expanded="true" signature="11835:12086" placeholder="insert into ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/UIManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#UIManager#0" expanded="false" />
+            <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />
+            <element signature="method#greeting#0;class#UIManager#0" expanded="false" />
+            <element signature="method#logout#0;class#UIManager#0" expanded="false" />
+            <element signature="method#login#0;class#UIManager#0" expanded="false" />
+            <element signature="method#accountsForm#0;class#UIManager#0" expanded="false" />
+            <element signature="e#8882#8890#0" expanded="true" />
+            <element signature="method#eventsForm#0;class#UIManager#0" expanded="false" />
+            <element signature="e#12321#12329#0" expanded="true" />
+            <element signature="method#getEvent#0;class#UIManager#0" expanded="false" />
+            <element signature="method#queryEvents#0;class#UIManager#0" expanded="false" />
+            <element signature="e#14766#14776#0" expanded="true" />
+            <element signature="e#15523#15531#0" expanded="true" />
+            <element signature="method#registerForm#0;class#UIManager#0" expanded="false" />
+            <element signature="method#isValidDate#0;class#UIManager#0" expanded="false" />
+            <element signature="method#isLeapYear#0;class#UIManager#0" expanded="false" />
+            <element signature="method#queryAccounts#0;class#UIManager#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -817,10 +891,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="e#288#581#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -833,35 +904,19 @@
             <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />
             <element signature="method#greeting#0;class#UIManager#0" expanded="false" />
             <element signature="method#logout#0;class#UIManager#0" expanded="false" />
-            <element signature="e#4655#4656#0" expanded="true" />
-            <element signature="e#4701#4702#0" expanded="true" />
             <element signature="method#login#0;class#UIManager#0" expanded="false" />
-            <element signature="e#5947#5948#0" expanded="true" />
-            <element signature="e#5991#5992#0" expanded="true" />
             <element signature="method#accountsForm#0;class#UIManager#0" expanded="false" />
-            <element signature="e#8120#8121#0" expanded="true" />
-            <element signature="e#8188#8189#0" expanded="true" />
             <element signature="e#8882#8890#0" expanded="true" />
-            <element signature="e#9351#9352#0" expanded="true" />
-            <element signature="e#9426#9427#0" expanded="true" />
             <element signature="method#eventsForm#0;class#UIManager#0" expanded="false" />
             <element signature="e#12321#12329#0" expanded="true" />
-            <element signature="e#13080#13081#0" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
             <element signature="method#getEvent#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryEvents#0;class#UIManager#0" expanded="false" />
             <element signature="e#14766#14776#0" expanded="true" />
             <element signature="e#15523#15531#0" expanded="true" />
-            <element signature="e#16334#16335#0" expanded="true" />
-            <element signature="e#16408#16409#0" expanded="true" />
             <element signature="method#registerForm#0;class#UIManager#0" expanded="false" />
             <element signature="method#isValidDate#0;class#UIManager#0" expanded="false" />
             <element signature="method#isLeapYear#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryAccounts#0;class#UIManager#0" expanded="false" />
-            <element signature="e#30381#30382#0" expanded="true" />
-            <element signature="e#30465#30466#0" expanded="true" />
-            <element signature="class#31660:32352" expanded="false" />
-            <element signature="method#validateNewPassword#0;class#UIManager#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -923,10 +978,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="e#288#581#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -939,35 +991,19 @@
             <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />
             <element signature="method#greeting#0;class#UIManager#0" expanded="false" />
             <element signature="method#logout#0;class#UIManager#0" expanded="false" />
-            <element signature="e#4655#4656#0" expanded="true" />
-            <element signature="e#4701#4702#0" expanded="true" />
             <element signature="method#login#0;class#UIManager#0" expanded="false" />
-            <element signature="e#5947#5948#0" expanded="true" />
-            <element signature="e#5991#5992#0" expanded="true" />
             <element signature="method#accountsForm#0;class#UIManager#0" expanded="false" />
-            <element signature="e#8120#8121#0" expanded="true" />
-            <element signature="e#8188#8189#0" expanded="true" />
             <element signature="e#8882#8890#0" expanded="true" />
-            <element signature="e#9351#9352#0" expanded="true" />
-            <element signature="e#9426#9427#0" expanded="true" />
             <element signature="method#eventsForm#0;class#UIManager#0" expanded="false" />
             <element signature="e#12321#12329#0" expanded="true" />
-            <element signature="e#13080#13081#0" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
             <element signature="method#getEvent#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryEvents#0;class#UIManager#0" expanded="false" />
             <element signature="e#14766#14776#0" expanded="true" />
             <element signature="e#15523#15531#0" expanded="true" />
-            <element signature="e#16334#16335#0" expanded="true" />
-            <element signature="e#16408#16409#0" expanded="true" />
             <element signature="method#registerForm#0;class#UIManager#0" expanded="false" />
             <element signature="method#isValidDate#0;class#UIManager#0" expanded="false" />
             <element signature="method#isLeapYear#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryAccounts#0;class#UIManager#0" expanded="false" />
-            <element signature="e#30381#30382#0" expanded="true" />
-            <element signature="e#30465#30466#0" expanded="true" />
-            <element signature="class#31660:32352" expanded="false" />
-            <element signature="method#validateNewPassword#0;class#UIManager#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1029,10 +1065,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#288#581#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1186,51 +1219,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
-          <folding>
-            <element signature="e#288#581#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/UIManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3316062">
-          <caret line="25" column="55" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.64675325">
+          <caret line="1086" column="73" selection-start-line="1086" selection-start-column="73" selection-end-line="1086" selection-end-column="73" />
           <folding>
             <element signature="docComment;class#UIManager#0" expanded="false" />
             <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />
             <element signature="method#greeting#0;class#UIManager#0" expanded="false" />
             <element signature="method#logout#0;class#UIManager#0" expanded="false" />
-            <element signature="e#4655#4656#0" expanded="true" />
-            <element signature="e#4701#4702#0" expanded="true" />
             <element signature="method#login#0;class#UIManager#0" expanded="false" />
-            <element signature="e#5947#5948#0" expanded="true" />
-            <element signature="e#5991#5992#0" expanded="true" />
             <element signature="method#accountsForm#0;class#UIManager#0" expanded="false" />
-            <element signature="e#8120#8121#0" expanded="true" />
-            <element signature="e#8188#8189#0" expanded="true" />
             <element signature="e#8882#8890#0" expanded="true" />
-            <element signature="e#9351#9352#0" expanded="true" />
-            <element signature="e#9426#9427#0" expanded="true" />
             <element signature="method#eventsForm#0;class#UIManager#0" expanded="false" />
             <element signature="e#12321#12329#0" expanded="true" />
-            <element signature="e#13080#13081#0" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
             <element signature="method#getEvent#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryEvents#0;class#UIManager#0" expanded="false" />
             <element signature="e#14766#14776#0" expanded="true" />
             <element signature="e#15523#15531#0" expanded="true" />
-            <element signature="e#16334#16335#0" expanded="true" />
-            <element signature="e#16408#16409#0" expanded="true" />
             <element signature="method#registerForm#0;class#UIManager#0" expanded="false" />
             <element signature="method#isValidDate#0;class#UIManager#0" expanded="false" />
             <element signature="method#isLeapYear#0;class#UIManager#0" expanded="false" />
             <element signature="method#queryAccounts#0;class#UIManager#0" expanded="false" />
-            <element signature="e#30381#30382#0" expanded="true" />
-            <element signature="e#30465#30466#0" expanded="true" />
-            <element signature="class#31660:32352" expanded="false" />
-            <element signature="method#validateNewPassword#0;class#UIManager#0" expanded="false" />
           </folding>
         </state>
       </provider>
