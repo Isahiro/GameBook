@@ -38,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/UIManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.64675325">
-              <caret line="1086" column="73" selection-start-line="1086" selection-start-column="73" selection-end-line="1086" selection-end-column="73" />
+              <caret line="1138" column="42" selection-start-line="1138" selection-start-column="42" selection-end-line="1138" selection-end-column="42" />
               <folding>
                 <element signature="docComment;class#UIManager#0" expanded="false" />
                 <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />
@@ -615,12 +615,12 @@
       <workItem from="1447197421448" duration="590000" />
       <workItem from="1447280205829" duration="16654000" />
       <workItem from="1447826475902" duration="21690000" />
-      <workItem from="1447885541162" duration="639000" />
+      <workItem from="1447885541162" duration="1125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76760000" />
+    <option name="totallyTimeSpent" value="77246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
@@ -1226,7 +1226,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/GameBook/UIManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64675325">
-          <caret line="1086" column="73" selection-start-line="1086" selection-start-column="73" selection-end-line="1086" selection-end-column="73" />
+          <caret line="1138" column="42" selection-start-line="1138" selection-start-column="42" selection-end-line="1138" selection-end-column="42" />
           <folding>
             <element signature="docComment;class#UIManager#0" expanded="false" />
             <element signature="method#reDraw#0;class#UIManager#0" expanded="false" />

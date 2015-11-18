@@ -1135,6 +1135,8 @@ public class UIManager extends JFrame
                     txtAccountName.setText(null);
                     txtGame_Service.setText(null);
                     txtServer.setText(null);
+                    contentPane.revalidate();
+                    contentPane.repaint();
                 }
             }
 
