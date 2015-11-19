@@ -128,9 +128,9 @@ public class DataBaseManager
 
         try
         {
-            String query = "select * from calendarevent where eventDateTime >= \"" +
+            String query = ("select * from calendarevent where eventDateTime >= \"" +
                     (date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDate() +
-                    " order by eventDateTime asc\"";
+                    "\" order by eventDateTime asc");
             results = statement.executeQuery(query);
 
             while(results.next() )
@@ -352,6 +352,23 @@ public class DataBaseManager
             prepStatement = connection.prepareStatement(query);
             prepStatement.execute();
             System.out.println("Password updated");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void addEvent(String date, String name, String game, String location, String description)
+    {
+        try
+        {
+            String query = "insert into calendarevent (eventDateTime, eventName, eventGame, " +
+                    "eventLocation, eventDescription) values (\"" + date + "\", \"" +
+                    name + "\", \"" + game + "\", \"" + location + "\", \"" + description + "\")";
+            prepStatement = connection.prepareStatement(query);
+            prepStatement.execute();
+            System.out.println("A new event \"" + name + "\" was created");
         }
         catch(Exception e)
         {

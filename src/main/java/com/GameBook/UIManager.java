@@ -401,13 +401,10 @@ public class UIManager extends JFrame
         btnQuery.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(radName.isSelected() == false && radGame.isSelected() == false)
-                {
+                if (radName.isSelected() == false && radGame.isSelected() == false) {
                     JOptionPane.showMessageDialog(null, "Please select whether to search by event name or by game");
-                }
-                else
-                {
-                    queryEvents(txtEventQuery.getText(), radName.isSelected() );
+                } else {
+                    queryEvents(txtEventQuery.getText(), radName.isSelected());
                 }
             }
 
@@ -433,6 +430,37 @@ public class UIManager extends JFrame
         });
 
         contentPane.add(btnQuery);
+
+        JLabel labCreateEvent = new JLabel("Know an event not listed? ");
+        contentPane.add(labCreateEvent);
+        JButton btnCreateEvent = new JButton("Create an event");
+        btnCreateEvent.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                addEvent();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        contentPane.add(btnCreateEvent);
 
         // Get all the events on or after today's date
         ArrayList<CalEvent> events = DBManager.getEvents(new Date());
@@ -601,7 +629,7 @@ public class UIManager extends JFrame
         }
         else
         {
-            JLabel labNoMatches = new JLabel("No results weree found");
+            JLabel labNoMatches = new JLabel("No results were found");
             contentPane.add(labNoMatches);
         }
 
@@ -692,6 +720,7 @@ public class UIManager extends JFrame
                 if (validateRegistration(newUser) )
                 {
                     DBManager.addAccount(newUser);
+                    currentUser = DBManager.login(txtRegUsername.getText(), pasRegPassword.getText() );
                     login(newUser.get("username").toString() );
                 }
             }
@@ -834,7 +863,7 @@ public class UIManager extends JFrame
         // Java Dates are calculated as being 1900 less than the real year
 
         // Test if the date entered is valid
-        if(!isValidDate(month, day, year) )
+        if(!isValidBirthday(month, day, year) )
         {
             for(int i = 15; i <= 19; i += 2)
                 contentPane.getComponent(i).setForeground(Color.red);
@@ -856,13 +885,12 @@ public class UIManager extends JFrame
     {
         int maxDaysInMonth = 0;
 
-        switch (month)
-        {
+        switch (month) {
             case 1:
                 maxDaysInMonth = 31;
                 break;
             case 2:
-                if(isLeapYear(year + 1900) ) // Adding 1900 as a workaround because of how Dates are handled
+                if (isLeapYear(year + 1900)) // Adding 1900 as a workaround because of how Dates are handled
                     maxDaysInMonth = 29;
                 else
                     maxDaysInMonth = 28;
@@ -902,7 +930,15 @@ public class UIManager extends JFrame
                 break;
         }
 
-        if(day > maxDaysInMonth)
+        if (day > maxDaysInMonth)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean isValidBirthday(int month, int day, int year)
+    {
+        if(!isValidDate(month, day, year) )
             return false;
 
         Date currDate = new Date();
@@ -1198,5 +1234,139 @@ public class UIManager extends JFrame
             JOptionPane.showMessageDialog(null, errorMessage);
 
         return isValid;
+    }
+
+    public void addEvent()
+    {
+        contentPane.removeAll();
+        contentPane.add(btnAccounts);
+        contentPane.add(btnEvents);
+
+        JLabel labNewEvent = new JLabel("Create an event");
+        labNewEvent.setFont(TITLEFONT);
+        contentPane.add(labNewEvent);
+        contentPane.add(new JLabel() ); // This is used for formatting
+        JLabel labName = new JLabel("Event Name: ");
+        contentPane.add(labName);
+        final JTextField txtName = new JTextField();
+        contentPane.add(txtName);
+        JLabel labGame = new JLabel("Game related if applicable: ");
+        contentPane.add(labGame);
+        final JTextField txtGame = new JTextField();
+        contentPane.add(txtGame);
+        JLabel labLocation = new JLabel("Location of the event: ");
+        contentPane.add(labLocation);
+        final JTextField txtLocation = new JTextField();
+        contentPane.add(txtLocation);
+        JLabel labDescription = new JLabel("Enter a description for the event: ");
+        contentPane.add(labDescription);
+        final JTextField txtDescription = new JTextField();
+        contentPane.add(txtDescription);
+
+        JLabel labEventMonth = new JLabel("Month of the event: ");
+        contentPane.add(labEventMonth);
+        final JComboBox cmbMonth = new JComboBox();
+        for(int i = 1; i <= 12; i++)
+            cmbMonth.addItem(i);
+        contentPane.add(cmbMonth);
+
+        JLabel labEventDay = new JLabel("Day of the month the event takes place: ");
+        contentPane.add(labEventDay);
+        final JComboBox cmbDay = new JComboBox();
+        for(int i = 1; i <= 31; i++)
+            cmbDay.addItem(i);
+        contentPane.add(cmbDay);
+
+        JLabel labEventYear = new JLabel("Year the event takes place: ");
+        contentPane.add(labEventYear);
+        final JTextField txtYear = new JTextField();
+        contentPane.add(txtYear);
+
+        JLabel labHour = new JLabel("Hour the event will occur (military hours): ");
+        contentPane.add(labHour);
+        final JComboBox cmbHour = new JComboBox();
+        for(int i = 0; i < 24; i++)
+            cmbHour.addItem(i);
+        contentPane.add(cmbHour);
+
+        JLabel labMinute = new JLabel("Minute of the hour the event starts: ");
+        contentPane.add(labMinute);
+        final JComboBox cmbMinute = new JComboBox();
+        for(int i = 0; i < 60; i++)
+            cmbMinute.addItem(i);
+        contentPane.add(cmbMinute);
+
+        JButton btnSubmitEvent = new JButton("Submit");
+
+        btnSubmitEvent.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (isValidDate(Integer.parseInt(cmbMonth.getSelectedItem().toString()),
+                        Integer.parseInt(cmbDay.getSelectedItem().toString()),
+                        Integer.parseInt(txtYear.getText().toString()) - 1900)){
+                    if (txtName.getText().toString().isEmpty())
+                        JOptionPane.showMessageDialog(null, "Events must have a name");
+                    else {
+                        String date = txtYear.getText().toString() + "-";
+
+                        if (Integer.parseInt(cmbMonth.getSelectedItem().toString()) < 10)
+                            date += "0";
+                        date += cmbMonth.getSelectedItem().toString() + "-";
+
+                        if (Integer.parseInt(cmbDay.getSelectedItem().toString()) < 10)
+                            date += "0";
+                        date += cmbDay.getSelectedItem().toString() + " ";
+
+                        if (Integer.parseInt(cmbHour.getSelectedItem().toString()) < 10)
+                            date += "0";
+                        date += cmbHour.getSelectedItem().toString() + ":";
+
+                        if (Integer.parseInt(cmbMinute.getSelectedItem().toString()) < 10)
+                            date += "0";
+                        date += cmbMinute.getSelectedItem().toString() + ":00";
+
+                        DBManager.addEvent(date, txtName.getText().toString(), txtGame.getText().toString(),
+                                txtLocation.getText().toString(), txtDescription.getText().toString() );
+
+                        txtName.setText(null);
+                        txtGame.setText(null);
+                        txtLocation.setText(null);
+                        txtDescription.setText(null);
+                        txtYear.setText(null);
+                        cmbDay.setSelectedIndex(0);
+                        cmbMonth.setSelectedIndex(0);
+                        cmbHour.setSelectedIndex(0);
+                        cmbMinute.setSelectedIndex(0);
+                        contentPane.revalidate();
+                        contentPane.repaint();
+                        JOptionPane.showMessageDialog(null, "Event successfully added");
+                    }
+                } else
+                    JOptionPane.showMessageDialog(null, "Must enter a valid date");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        contentPane.add(btnSubmitEvent);
+        this.reDraw();
     }
 }
